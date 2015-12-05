@@ -8,6 +8,8 @@
 
 #include <iostream>
 
+int reused = 42; //全局作用域
+
 int main(int argc, const char * argv[])
 {
     // insert code here...
@@ -18,6 +20,27 @@ int main(int argc, const char * argv[])
         sum += val; //等价于 sum = sum + val;
         std::cout << "sum of 1 to 10 inclusive is " << sum << std::endl;
     }
+    
+    /*
+     嵌套作用域，被包含（或者说被嵌套）的作用域称为内层作用域（inner scope），包含着别的作用域的作用域为外层作用域（outer scope）。
+     */
+    int unique = 0;//块作用域
+    //输出 #1：使用全局变量reused；输出42 0
+    std::cout << reused << " " << unique << std::endl;
+    int reused = 0; //新建局部变量
+    //输出 #2：使用局部变量reused; 输出 0 0
+    std::cout << reused << " " << unique << std::endl;
+    //输出 #3：显示的访问全局变量reused;输出 42 0
+    std::cout << ::reused << " " << unique << std::endl;
+    int _ = 0;
+    double Double = 1.1;
+    printf("%d", _);
+    
+    int i = 100;
+    sum = 0;
+    for (int i = 0; i != 10; ++i)
+        sum += i;
+    std::cout << i << " " << sum << std::endl;
     return 0;
 }
 /*
